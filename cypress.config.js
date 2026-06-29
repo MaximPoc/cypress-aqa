@@ -2,6 +2,12 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   allowCypressEnv: false,
+  env: {
+    basicAuth: {
+      username: 'guest',
+      password: 'welcome2qauto',
+    },
+  },
   video: true,
   videoCompression: 32,
   screenshotOnRunFailure: true,
@@ -13,10 +19,10 @@ module.exports = defineConfig({
     openMode: 1,
   },
   e2e: {
+    baseUrl: 'https://qauto.forstudy.space',
+    specPattern: 'cypress/e2e/**/*.cy.js',
     setupNodeEvents(on, config) {
       // implement node event listeners here
-      this.baseUrl = 'https://example.cypress.io';
-      this.specPattern = 'cypress/e2e/**/*.cy.js';
     },
   },
 });
