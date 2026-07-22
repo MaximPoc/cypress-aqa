@@ -7,6 +7,12 @@ module.exports = defineConfig({
       username: 'guest',
       password: 'welcome2qauto',
     },
+    user: {
+      name: 'Maxim',
+      lastName: 'Test',
+      email: 'testovicht273@gmail.com',
+      password: 'Qwerty123',
+    },
   },
   video: true,
   videoCompression: 32,
