@@ -1,0 +1,15 @@
+{
+  "baseUrl": "https://qauto2.forstudy.space",
+  "env": {
+    "defaultUserCreds": {
+      "username": "testovicht273+qauto2-1784749922@gmail.com",
+      "password": "Qwerty123"
+    },
+    "user": {
+      "name": "Maxim",
+      "lastName": "Test",
+      "email": "testovicht273+qauto2-1784749922@gmail.com",
+      "password": "Qwerty123"
+    }
+  }
+}
