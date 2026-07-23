@@ -15,6 +15,12 @@ module.exports = defineConfig({
   allowCypressEnv: false,
   env: {
     TEST_ENV: "dev",
+    user: {
+      name: "Maxim",
+      lastName: "Test",
+      email: "testovicht273@gmail.com",
+      password: "Qwerty123",
+    },
   },
   expose: {
     basicAuth: {
@@ -59,8 +65,10 @@ module.exports = defineConfig({
 
       console.log(`Loaded config for ${testEnv}:`, configValue);
 
-      config.env = { ...config.env, ...configValue.env, TEST_ENV: testEnv };
-      config = { ...config, ...configValue };
+      const { env: envFromFile, ...configFromFile } = configValue;
+      config = { ...config, ...configFromFile };
+      // Keep cypress.config.js env (e.g. user for registration) and merge per-env creds
+      config.env = { ...config.env, ...envFromFile, TEST_ENV: testEnv };
 
       config.reporterOptions = {
         ...config.reporterOptions,
