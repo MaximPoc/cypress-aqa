@@ -21,6 +21,21 @@ export class AddExpenseDialog extends BaseDialog {
       });
   }
 
+  getYesterdayDate() {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
+  }
+
+  fillReportDate(date = this.getYesterdayDate()) {
+    this.selectors.dateInput().clear().type(date);
+  }
+
   fillMileage(mileage) {
     this.selectors.mileageInput().clear().type(String(mileage));
   }
@@ -37,11 +52,12 @@ export class AddExpenseDialog extends BaseDialog {
     this.selectors.addButton().should('be.enabled').click();
   }
 
-  addExpense({ car, mileage, liters, totalCost }) {
+  addExpense({ car, mileage, liters, totalCost, date } = {}) {
     this.assertVisible();
     if (car) {
       this.selectCar(car);
     }
+    this.fillReportDate(date);
     this.fillMileage(mileage);
     this.fillLiters(liters);
     this.fillTotalCost(totalCost);

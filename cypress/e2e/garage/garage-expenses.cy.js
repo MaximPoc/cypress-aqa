@@ -80,12 +80,13 @@ describe('Garage and Fuel expenses', { testIsolation: false }, () => {
   });
 
   it('Step 6: Fill expense data for the created car', () => {
-    // Fills expense form for the created car: mileage, liters and total cost
+    // Fills expense form for the created car: yesterday date, mileage, liters and total cost
     cy.testDescription(
-      'Fills expense form for the created car: mileage, liters and total cost',
+      'Fills expense form for the created car: yesterday date, mileage, liters and total cost',
     );
 
     expensesPage.addExpenseDialog.selectCar(car.name);
+    expensesPage.addExpenseDialog.fillReportDate();
     expensesPage.addExpenseDialog.fillMileage(expense.mileage);
     expensesPage.addExpenseDialog.fillLiters(expense.liters);
     expensesPage.addExpenseDialog.fillTotalCost(expense.totalCost);
