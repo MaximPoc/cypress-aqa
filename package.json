@@ -5,11 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress run",
-    "cypress:open": "npx cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:qauto": "TEST_ENV=dev cypress run --spec cypress/e2e/garage/garage-expenses.cy.js",
+    "test:qauto2": "TEST_ENV=prod cypress run --spec cypress/e2e/garage/garage-expenses.cy.js",
+    "cypress:open:dev": "TEST_ENV=dev cypress open",
+    "cypress:open:prod": "TEST_ENV=prod cypress open",
+    "cypress:run:dev": "TEST_ENV=dev cypress run --spec cypress/e2e/garage/garage-expenses.cy.js",
+    "cypress:run:prod": "TEST_ENV=prod cypress run --spec cypress/e2e/garage/garage-expenses.cy.js"
   },
   "author": "Cypress AQA",
   "license": "ISC",
   "dependencies": {
     "cypress": "^15.18.0"
+  },
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^4.0.2"
   }
 }

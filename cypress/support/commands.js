@@ -8,12 +8,18 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
+const addContext = require('mochawesome/addContext');
+
+Cypress.Commands.add('testDescription', (description) => {
+  cy.once('test:after:run', (test) => {
+    addContext({ test }, { title: 'Description', value: description });
+  });
+});
+
 Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-  return cy.env(['basicAuth']).then(({ basicAuth }) => {
-    return originalFn(url, {
-      auth: basicAuth,
-      ...options,
-    });
+  return originalFn(url, {
+    auth: Cypress.expose('basicAuth'),
+    ...options,
   });
 });
 
@@ -34,9 +40,14 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
 
 Cypress.Commands.add('login', (email, password) => {
   cy.visit('/');
-  cy.get('.header_signin').click();
-  cy.get('.modal-content').should('be.visible');
-  cy.get('#signinEmail').type(email);
-  cy.get('#signinPassword').type(password, { sensitive: true });
-  cy.get('.modal-content').contains('button', 'Login').click();
+  cy.get('body').then(($body) => {
+    if ($body.find('.header_signin').length) {
+      cy.get('.header_signin').click();
+      cy.get('.modal-content').should('be.visible');
+      cy.get('#signinEmail').type(email);
+      cy.get('#signinPassword').type(password, { sensitive: true });
+      cy.get('.modal-content').contains('button', 'Login').click();
+    }
+  });
+  cy.url().should('include', '/panel/garage');
 });
